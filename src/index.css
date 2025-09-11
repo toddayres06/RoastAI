@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* optional: quick dark vibe */
+:root { color-scheme: dark; }
+
+@layer base {
+  html, body, #root { height: 100%; } /* ensures full height */
+  body {
+    @apply min-h-screen bg-gradient-to-br from-orange-500 to-black text-neutral-100;
+    @apply font-display;
+  }
+}
