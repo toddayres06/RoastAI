@@ -29,15 +29,18 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  async function signInWithEmail(email) {
-    // Sends a magic-link email. Make sure your Supabase "Site URL" / Redirects allow this origin.
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: window.location.origin }
-    })
-    if (error) throw error
-    return true
-  }
+async function signInWithEmail(email) {
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: window.location.origin, // e.g., http://localhost:5173 or 5174
+      shouldCreateUser: true,                   // ✅ important
+    },
+  })
+  if (error) throw error
+  return true
+}
+
 
   async function signOut() {
     const { error } = await supabase.auth.signOut()
